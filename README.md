@@ -1,75 +1,98 @@
-# React + TypeScript + Vite
+# اپلیکیشن مسیریابی بهینه (Optimal Routing App)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+این پروژه یک اپلیکیشن وب برای پیدا کردن مسیر بهینه بین دو نقطه بر روی نقشه است که با استفاده از سرویس‌های Mapbox و با تمرکز بر یک رابط کاربری مدرن و واکنش‌گرا پیاده‌سازی شده است.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo (مشاهده دمو)
 
-## React Compiler
+**[شما می‌توانید نسخه زنده‌ی این پروژه را در Vercel مشاهده کنید](https://optimal-routing-app.vercel.app/)**
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## 📸 Screenshots (تصاویر پروژه)
 
-## Expanding the ESLint configuration
+| نمای اصلی اپلیکیشن (جستجو و نمایش مسیر) | اطلاعات مسیر و نقاط میانی |
+| :-----------------------------------------: | :---------------------------------------: |
+| ![Screenshot 1](screenshots/screenshot-1.png) | ![Screenshot 2](screenshots/screenshot-2.png) |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**[برای مشاهده گالری کامل تصاویر پروژه کلیک کنید](./screenshots)**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Features (ویژگی‌ها)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **نقشه تعاملی:** نمایش نقشه با استفاده از `Mapbox GL JS` با قابلیت جابجایی و زوم.
+- **جستجوی آدرس و مکان:** قابلیت جستجوی مکان‌های مختلف با استفاده از سرویس `Mapbox Geocoding` و نمایش نتایج به صورت لحظه‌ای.
+- **انتخاب مبدا، مقصد و نقاط میانی:**
+  - امکان انتخاب نقاط از طریق کلیک مستقیم روی نقشه.
+  - امکان انتخاب نقاط از طریق لیست نتایج جستجو.
+- **محاسبه مسیر بهینه:** دریافت و نمایش بهینه‌ترین مسیر رانندگی بین نقاط انتخاب شده با استفاده از `Mapbox Directions API`.
+- **نمایش اطلاعات مسیر:** نمایش جزئیات کامل مسیر شامل **مسافت کل** و **زمان تخمینی سفر**.
+- **مدیریت وضعیت با Zustand:** مدیریت وضعیت گلوبال برنامه (نقاط انتخاب شده، اطلاعات مسیر، وضعیت بارگذاری) با `Zustand` به شکلی ساده و کارآمد.
+- **رابط کاربری مدرن و واکنش‌گرا:** طراحی شده با **Tailwind CSS** و کامپوننت‌های آماده از **shadcn/ui** برای تجربه‌ی کاربری بهتر در دستگاه‌های مختلف.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tech Stack (تکنولوژی‌های استفاده شده)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React & Vite:** به عنوان فریمورک اصلی و ابزار ساخت (Build Tool) سریع پروژه.
+- **TypeScript:** برای نوع‌بندی (Type-Safety) قوی و توسعه‌پذیری بهتر.
+- **Tailwind CSS & shadcn/ui:** برای پیاده‌سازی سریع یک رابط کاربری مدرن، خوانا و کاملاً واکنش‌گرا.
+- **Mapbox GL JS & React Map GL:** برای نمایش نقشه و تعامل با آن در محیط React.
+- **Zustand:** برای مدیریت وضعیت (State Management) ساده، بهینه و بدون نیاز به Boilerplate زیاد.
+- **pnpm:** به عنوان مدیر بسته (Package Manager) سریع و بهینه در مصرف فضا.
+
+---
+
+## Architecture Notes (توضیح معماری)
+
+ساختار این پروژه بر اساس جداسازی منطقی کامپوننت‌ها، سرویس‌ها و مدیریت وضعیت طراحی شده است:
+
+- **`src/components/features/map/`**: کامپوننت‌های اصلی که منطق اصلی برنامه را در بر دارند، مانند `MapBox` (رندر نقشه)، `GeocodeSearch` (باکس جستجو) و `RoutePanel` (نمایش اطلاعات مسیر).
+- **`src/components/ui/`**: کامپوننت‌های پایه و اتمی (مانند `Button`, `Dialog`, `Command`) که توسط `shadcn/ui` مدیریت می‌شوند و در سراسر برنامه استفاده شده‌اند.
+- **`src/services/`**: ماژول‌های مربوط به ارتباط با سرویس‌های خارجی Mapbox. هر سرویس (مانند `mapbox-directions`, `mapbox-geocoding`) در فایل جداگانه‌ای کپسوله شده است.
+- **`src/store/`**: منطق مدیریت وضعیت برنامه با Zustand. فایل `use-map-store.ts` تمام وضعیت‌های مربوط به نقشه، نقاط و مسیر را مدیریت می‌کند.
+- **`src/lib/`**: شامل توابع کمکی و ابزارهای عمومی پروژه، مانند فرمت کردن زمان و مسافت.
+
+---
+
+## Get Started (راه‌اندازی پروژه)
+
+### 1. پیش‌نیازها
+
+- Node.js (v18.x or later)
+- pnpm (یا npm/yarn)
+
+### 2. نصب و راه‌اندازی
+
+1.  **کلون کردن مخزن:**
+
+    ```bash
+    git clone https://github.com/masoudkaarimi/optimal-routing-app.git
+    cd optimal-routing-app
+    ```
+
+2.  **نصب وابستگی‌ها:**
+
+    ```bash
+    pnpm install
+    ```
+
+3.  **پیکربندی متغیرهای محیطی:**
+
+    یک فایل به نام `.env.local` در ریشه پروژه ایجاد کرده و کلید دسترسی Mapbox خود را در آن قرار دهید. می‌توانید از فایل `example.env.local` کپی کنید.
+
+    ```.env.local
+    VITE_MAPBOX_ACCESS_TOKEN="YOUR_MAPBOX_ACCESS_TOKEN"
+    ```
+    > **نکته:** برای دریافت کلید دسترسی، به وب‌سایت [Mapbox](https://www.mapbox.com/) مراجعه کرده و یک حساب کاربری رایگان بسازید.
+
+4.  **اجرای سرور توسعه:**
+
+    ```bash
+    pnpm dev
+    ```
+
+5.  برنامه اکنون در آدرس `http://localhost:5173` (یا پورت دیگر) قابل مشاهده است.
+
