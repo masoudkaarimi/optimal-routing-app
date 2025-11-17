@@ -1,12 +1,23 @@
-import {useEffect} from 'react';
+import {useEffect, Suspense, lazy} from 'react';
 
-import MapBox from '@/components/features/map/map-box.tsx';
+import {useMapStore} from '@/store/use-map-store';
 import SearchBox from '@/components/features/map/search-box.tsx';
 import {RoutePanel} from '@/components/features/map/route-panel.tsx';
 import {PlaceInfoCard} from '@/components/features/map/place-info-card.tsx';
-import {useMapStore} from '@/store/use-map-store';
 import {formatDistancePersian, formatDurationPersian} from '@/lib/utils';
 import {Button} from "@/components/ui/button.tsx";
+
+const MapBox = lazy(() => import('@/components/features/map/map-box.tsx'));
+
+function MapLoadingFallback() {
+    return (
+        <div className="w-screen h-screen flex items-center justify-center bg-muted">
+            <p className="text-lg text-muted-foreground animate-pulse">
+                در حال بارگذاری نقشه...
+            </p>
+        </div>
+    );
+}
 
 export default function App() {
     const {
@@ -54,7 +65,7 @@ export default function App() {
                         title="ریست مسیر"
                         aria-label="Reset route"
                     >
-                        ریست مسیر
+                        بازنشانی مسیریابی
                     </Button>
                 )}
             </div>
@@ -64,7 +75,9 @@ export default function App() {
                 className="fixed w-full max-w-max text-center bottom-14 sm:absolute sm:bottom-4 sm:top-auto left-1/2 -translate-x-1/2 z-30 rounded-md bg-black/80 text-white px-4 py-2 text-sm shadow-xl backdrop-blur-sm">{distanceText} • {durationText}</div>)}
 
             {/* Main map component */}
-            <MapBox/>
+            <Suspense fallback={<MapLoadingFallback/>}>
+                <MapBox/>
+            </Suspense>
 
             {/* Routing panel dialog */}
             <RoutePanel/>
